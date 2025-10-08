@@ -3,6 +3,16 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+// Types pour Google Analytics et Meta Pixel
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+    fbq?: (...args: unknown[]) => void;
+    _fbq?: unknown;
+  }
+}
+
 // Configuration - À REMPLACER avec vos IDs réels
 const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_ID || 'G-XXXXXXXXXX';
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '000000000000000';
@@ -12,15 +22,15 @@ export default function Analytics() {
 
   useEffect(() => {
     // Google Analytics 4 - Page View
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'page_view', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'page_view', {
         page_path: pathname,
       });
     }
 
     // Meta Pixel - Page View
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'PageView');
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'PageView');
     }
   }, [pathname]);
 
@@ -74,17 +84,17 @@ export function MetaPixelScript() {
 }
 
 // Tracking events pour le formulaire
-export const trackFormEvent = (eventName: string, data?: Record<string, any>) => {
+export const trackFormEvent = (eventName: string, data?: Record<string, unknown>) => {
   if (typeof window === 'undefined') return;
 
   // Google Analytics 4
-  if ((window as any).gtag) {
-    (window as any).gtag('event', eventName, data);
+  if (window.gtag) {
+    window.gtag('event', eventName, data);
   }
 
   // Meta Pixel
-  if ((window as any).fbq) {
-    (window as any).fbq('trackCustom', eventName, data);
+  if (window.fbq) {
+    window.fbq('trackCustom', eventName, data);
   }
 
   console.log('Tracking event:', eventName, data);
