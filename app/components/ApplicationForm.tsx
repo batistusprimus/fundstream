@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { trackFormEvent } from './Analytics';
 
 type FormData = {
   fundingAmount: string;
@@ -15,6 +16,14 @@ type FormData = {
   companyName: string;
   consentPartners: boolean;
   consentMarketing: boolean;
+  // Hidden tracking fields
+  utmSource: string;
+  utmCampaign: string;
+  utmMedium: string;
+  utmContent: string;
+  utmTerm: string;
+  device: string;
+  referrer: string;
 };
 
 export default function ApplicationForm() {
@@ -30,10 +39,47 @@ export default function ApplicationForm() {
     email: '',
     phone: '',
     companyName: '',
-    consentPartners: false,
+    consentPartners: true, // Pre-checked as per requirements
     consentMarketing: false,
+    // Tracking fields (populated on mount)
+    utmSource: '',
+    utmCampaign: '',
+    utmMedium: '',
+    utmContent: '',
+    utmTerm: '',
+    device: '',
+    referrer: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Populate tracking data on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const getDeviceType = () => {
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'tablet';
+        if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'mobile';
+        return 'desktop';
+      };
+
+      setFormData(prev => ({
+        ...prev,
+        utmSource: urlParams.get('utm_source') || '',
+        utmCampaign: urlParams.get('utm_campaign') || '',
+        utmMedium: urlParams.get('utm_medium') || '',
+        utmContent: urlParams.get('utm_content') || '',
+        utmTerm: urlParams.get('utm_term') || '',
+        device: getDeviceType(),
+        referrer: document.referrer || '',
+      }));
+
+      // Track form view
+      trackFormEvent('form_view', {
+        form_name: 'application_form'
+      });
+    }
+  }, []);
 
   const updateField = (field: keyof FormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -62,12 +108,34 @@ export default function ApplicationForm() {
     }
 
     setErrors(newErrors);
+    
+    // Track validation errors
+    if (Object.keys(newErrors).length > 0) {
+      trackFormEvent('form_error', {
+        step,
+        errors: Object.keys(newErrors),
+      });
+    }
+    
     return Object.keys(newErrors).length === 0;
   };
 
   const nextStep = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, 4));
+      const newStep = Math.min(currentStep + 1, 4);
+      setCurrentStep(newStep);
+      
+      // Track step progression
+      if (currentStep === 1) {
+        trackFormEvent('form_start', {
+          funding_amount: formData.fundingAmount,
+          purpose: formData.purpose,
+        });
+      } else {
+        trackFormEvent('form_progress', {
+          step: newStep,
+        });
+      }
     }
   };
 
@@ -78,7 +146,17 @@ export default function ApplicationForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateStep(4)) {
-      // In production, send to backend
+      // Track successful submission
+      trackFormEvent('form_submit', {
+        funding_amount: formData.fundingAmount,
+        purpose: formData.purpose,
+        industry: formData.industry,
+        business_age: formData.businessAge,
+        device: formData.device,
+        utm_source: formData.utmSource,
+      });
+      
+      // TODO: In production, send to GoHighLevel
       console.log('Form submitted:', formData);
       router.push('/thank-you');
     }
@@ -93,6 +171,28 @@ export default function ApplicationForm() {
             Start Your Application
           </h2>
           <p className="text-lg text-[#6B7280]">Complete the form in 4 simple steps · Takes only 2 minutes</p>
+        </div>
+
+        {/* Privacy Notice */}
+        <div className="mb-8 bg-[#F5F7FA] rounded-lg p-4 border border-gray-200">
+          <h3 className="text-sm font-semibold text-[#1E3A5F] mb-2 flex items-center">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Privacy Notice
+          </h3>
+          <p className="text-sm text-[#6B7280] mb-3">
+            We collect the information you provide (contact details, company info, financing needs) to connect you with suitable finance partners. We may share this information with partners only with your permission.
+          </p>
+          <p className="text-sm text-[#6B7280] mb-3">
+            <strong>Your rights:</strong> You can opt-out of data sharing, access your data, request deletion, and correct inaccuracies. State-specific privacy rights apply (CA, VA, CO, CT, UT).
+          </p>
+          <p className="text-sm text-[#6B7280]">
+            <strong>Learn more:</strong>{' '}
+            <a href="/privacy" className="text-[#00B8A9] underline hover:text-[#00E5D0]">Privacy Policy</a>
+            {' | '}
+            <a href="/privacy-choices" className="text-[#00B8A9] underline hover:text-[#00E5D0]">Your Privacy Choices</a>
+          </p>
         </div>
 
         <div className="bg-white rounded-3xl shadow-2xl shadow-[#1E3A5F]/10 p-8 md:p-12 border border-gray-100">
@@ -372,8 +472,8 @@ export default function ApplicationForm() {
                         className="w-5 h-5 mt-0.5 text-[#00B8A9] border-gray-300 rounded focus:ring-[#00B8A9] cursor-pointer"
                       />
                       <span className="ml-3 text-sm text-[#1E3A5F]">
-                        I agree that my information will be shared with selected financial partners (banks, fintechs, brokers) so they can contact me to review my financing request.{' '}
-                        <a href="/privacy" target="_blank" className="text-[#00B8A9] underline">Privacy Policy</a> *
+                        I authorize fund-stream to share my request with selected finance partners so they may contact me by phone, email, and/or SMS to review my application. This may include calls or texts using an automatic telephone dialing system or prerecorded voice. I am not required to consent to purchase. See{' '}
+                        <a href="/privacy" target="_blank" className="text-[#00B8A9] underline">Privacy Policy</a>. *
                       </span>
                     </label>
                     {errors.consentPartners && <p className="text-[#EF4444] text-sm mt-2 ml-8">{errors.consentPartners}</p>}
@@ -388,22 +488,10 @@ export default function ApplicationForm() {
                         className="w-5 h-5 mt-0.5 text-[#00B8A9] border-gray-300 rounded focus:ring-[#00B8A9] cursor-pointer"
                       />
                       <span className="ml-3 text-sm text-[#1E3A5F]">
-                        I agree to receive marketing communications from fund-stream and its partners. (Optional)
+                        I agree to receive marketing communications from fund-stream.
                       </span>
                     </label>
                   </div>
-                </div>
-
-                <div className="bg-[#F5F7FA] p-4 rounded-lg">
-                  <p className="text-xs text-[#6B7280]">
-                    In accordance with CCPA, you have the right to access, correct, and delete your data. To exercise your rights, contact us at privacy@fundstream.com.
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <p className="text-sm text-[#6B7280]">
-                    Free and no obligation · Response in 48-72h · CCPA protected data
-                  </p>
                 </div>
               </div>
             )}
@@ -436,15 +524,24 @@ export default function ApplicationForm() {
                     </svg>
                   </button>
                 ) : (
-                  <button
-                    type="submit"
-                    className="group px-8 py-3.5 bg-gradient-to-r from-[#00B8A9] to-[#00E5D0] text-white font-semibold rounded-xl hover:shadow-lg transition-all inline-flex items-center space-x-2"
-                  >
-                    <span>Submit Application</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </button>
+                  <div className="space-y-4">
+                    <button
+                      type="submit"
+                      className="group px-8 py-3.5 bg-gradient-to-r from-[#00B8A9] to-[#00E5D0] text-white font-semibold rounded-xl hover:shadow-lg transition-all inline-flex items-center space-x-2"
+                    >
+                      <span>Submit Application</span>
+                      <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </button>
+                    <p className="text-xs text-[#6B7280] text-center">
+                      By submitting this form, you agree to our{' '}
+                      <a href="/terms" target="_blank" className="text-[#00B8A9] underline">Terms of Service</a>.
+                      <br />
+                      Privacy rights: You have the right to opt-out of data sharing and exercise other privacy rights under applicable state laws. See{' '}
+                      <a href="/privacy-choices" target="_blank" className="text-[#00B8A9] underline">Your Privacy Choices</a>.
+                    </p>
+                  </div>
                 )}
               </div>
             </div>

@@ -14,7 +14,7 @@ export default function Footer() {
               height={64}
               className="h-12 w-auto mb-4 brightness-0 invert"
             />
-            <p className="text-gray-300 mb-4">by BPC Group</p>
+            <p className="text-gray-300 mb-4">fund-stream by BP Les Cannisses KFT</p>
             <p className="text-gray-400 text-sm max-w-md">
               We connect your business financing request with qualified financial partners. Free, fast, no obligation.
             </p>
@@ -35,13 +35,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/ccpa" className="text-gray-300 hover:text-[#00B8A9] transition-colors">
-                  Do Not Sell My Personal Information (CCPA)
+                <a href="/privacy-choices" className="text-gray-300 hover:text-[#00B8A9] transition-colors">
+                  Your Privacy Choices
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@fundstream.com" className="text-gray-300 hover:text-[#00B8A9] transition-colors">
-                  Contact Us
+                <a href="mailto:baptiste@bpcorp.eu" className="text-gray-300 hover:text-[#00B8A9] transition-colors">
+                  Contact: baptiste@bpcorp.eu
+                </a>
+              </li>
+              <li>
+                <a href="mailto:baptiste@bpcorp.eu" className="text-gray-300 hover:text-[#00B8A9] transition-colors">
+                  Privacy: baptiste@bpcorp.eu
                 </a>
               </li>
             </ul>
@@ -51,13 +56,13 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-600 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <p>© 2025 BPC Group. All rights reserved.</p>
+            <p>© 2025 BP Les Cannisses KFT. All rights reserved.</p>
             <p className="mt-4 md:mt-0">
               <span className="inline-flex items-center">
                 <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
-                CCPA Compliant
+                Your Privacy Matters - State Privacy Rights Respected
               </span>
               <span className="mx-3">|</span>
               <span className="inline-flex items-center">
