@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 export default function Hero() {
   const scrollToForm = () => {
     document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' });
@@ -8,6 +10,18 @@ export default function Hero() {
   return (
     <section className="bg-gradient-to-br from-[#1E3A5F] to-[#2C4F7C] text-white py-16 px-6 md:py-24">
       <div className="max-w-7xl mx-auto">
+        {/* Logo */}
+        <div className="mb-12">
+          <Image 
+            src="/fundstream_transparent.png" 
+            alt="fund-stream logo" 
+            width={250} 
+            height={80}
+            priority
+            className="h-16 w-auto"
+          />
+        </div>
+
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>

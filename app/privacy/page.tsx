@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Footer from '../components/Footer';
 
 export const metadata = {
@@ -11,6 +12,16 @@ export default function Privacy() {
     <main>
       <section className="py-16 px-6 bg-white min-h-screen">
         <div className="max-w-4xl mx-auto">
+          <Link href="/" className="inline-block mb-8">
+            <Image 
+              src="/fundstream_transparent.png" 
+              alt="fund-stream logo" 
+              width={200} 
+              height={64}
+              className="h-12 w-auto"
+            />
+          </Link>
+          
           <Link href="/" className="text-[#00B8A9] hover:underline mb-8 inline-block">
             ← Back to Home
           </Link>

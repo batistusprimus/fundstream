@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Footer from '../components/Footer';
 
 export const metadata = {
@@ -11,6 +12,20 @@ export default function ThankYou() {
     <main>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#1E3A5F] to-[#2C4F7C] text-white py-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Logo */}
+          <div className="mb-12 text-center">
+            <Link href="/">
+              <Image 
+                src="/fundstream_transparent.png" 
+                alt="fund-stream logo" 
+                width={200} 
+                height={64}
+                className="h-12 w-auto inline-block"
+              />
+            </Link>
+          </div>
+
         <div className="max-w-4xl mx-auto text-center">
           {/* Success Icon */}
           <div className="inline-flex items-center justify-center w-24 h-24 bg-[#10B981] rounded-full mb-8">

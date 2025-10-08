@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Footer() {
   return (
     <footer className="bg-[#1E3A5F] text-white py-12 px-6">
@@ -5,7 +7,13 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold mb-2">fund-stream</h3>
+            <Image 
+              src="/fundstream_transparent.png" 
+              alt="fund-stream logo" 
+              width={200} 
+              height={64}
+              className="h-12 w-auto mb-4 brightness-0 invert"
+            />
             <p className="text-gray-300 mb-4">by BPC Group</p>
             <p className="text-gray-400 text-sm max-w-md">
               We connect your business financing request with qualified financial partners. Free, fast, no obligation.
