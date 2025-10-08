@@ -74,7 +74,7 @@ export default function ThankYou() {
                 3
               </div>
               <div>
-                <h3 className="text-xl font-bold text-[#1E3A5F] mb-2">You'll Be Contacted</h3>
+                <h3 className="text-xl font-bold text-[#1E3A5F] mb-2">You&apos;ll Be Contacted</h3>
                 <p className="text-[#6B7280]">
                   Interested financial partners will contact you within 48-72h by email or phone to discuss your financing request.
                 </p>
