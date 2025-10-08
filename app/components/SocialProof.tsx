@@ -8,8 +8,6 @@ export default function SocialProof() {
   return (
     <section className="py-16 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-[#1E3A5F] text-center mb-12">What Our Clients Say</h2>
-        
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-8 text-center">
           {stats.map((stat, index) => (
