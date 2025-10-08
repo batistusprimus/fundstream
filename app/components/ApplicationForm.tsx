@@ -85,26 +85,48 @@ export default function ApplicationForm() {
   };
 
   return (
-    <section id="application-form" className="py-16 px-6 bg-[#F5F7FA]">
+    <section id="application-form" className="py-20 px-6 bg-gradient-to-b from-[#F5F7FA] to-white">
       <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-          {/* Progress Bar */}
-          <div className="mb-8">
-            <div className="flex justify-between mb-2">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E3A5F] mb-4">
+            Start Your Application
+          </h2>
+          <p className="text-lg text-[#6B7280]">Complete the form in 4 simple steps · Takes only 2 minutes</p>
+        </div>
+
+        <div className="bg-white rounded-3xl shadow-2xl shadow-[#1E3A5F]/10 p-8 md:p-12 border border-gray-100">
+          {/* Progress Bar - Enhanced */}
+          <div className="mb-10">
+            <div className="flex justify-between mb-4">
               {[1, 2, 3, 4].map((step) => (
-                <div key={step} className="flex-1">
-                  <div className={`h-2 rounded-full ${step <= currentStep ? 'bg-[#00B8A9]' : 'bg-gray-200'} ${step !== 4 ? 'mr-2' : ''}`}></div>
+                <div key={step} className="flex-1 relative">
+                  <div className={`h-2.5 rounded-full transition-all duration-500 ${step <= currentStep ? 'bg-gradient-to-r from-[#00B8A9] to-[#00E5D0]' : 'bg-gray-200'} ${step !== 4 ? 'mr-2' : ''}`}>
+                    {step === currentStep && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#00B8A9] to-[#00E5D0] rounded-full animate-pulse"></div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
-            <p className="text-sm text-[#6B7280] text-center">Step {currentStep} of 4</p>
+            <div className="flex justify-between text-xs text-[#6B7280] px-1">
+              <span className={currentStep === 1 ? 'font-bold text-[#00B8A9]' : ''}>Financing</span>
+              <span className={currentStep === 2 ? 'font-bold text-[#00B8A9]' : ''}>Business</span>
+              <span className={currentStep === 3 ? 'font-bold text-[#00B8A9]' : ''}>Contact</span>
+              <span className={currentStep === 4 ? 'font-bold text-[#00B8A9]' : ''}>Consent</span>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit}>
             {/* Step 1: Financing Need */}
             {currentStep === 1 && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-[#1E3A5F] mb-6">Your Financing Need</h2>
+              <div className="space-y-8 animate-fade-in">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#00B8A9] to-[#00E5D0] rounded-lg flex items-center justify-center text-white font-bold">
+                    1
+                  </div>
+                  <h2 className="text-3xl font-bold text-[#1E3A5F]">Your Financing Need</h2>
+                </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-[#1E3A5F] mb-3">
@@ -122,10 +144,10 @@ export default function ApplicationForm() {
                         key={option.value}
                         type="button"
                         onClick={() => updateField('fundingAmount', option.value)}
-                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                        className={`p-4 rounded-xl border-2 text-left transition-all duration-200 font-medium ${
                           formData.fundingAmount === option.value
-                            ? 'border-[#00B8A9] bg-[#00B8A9]/5'
-                            : 'border-gray-300 hover:border-[#00B8A9]/50'
+                            ? 'border-[#00B8A9] bg-gradient-to-br from-[#00B8A9]/10 to-[#00B8A9]/5 shadow-md'
+                            : 'border-gray-300 hover:border-[#00B8A9]/50 hover:shadow-sm'
                         }`}
                       >
                         {option.label}
@@ -151,10 +173,10 @@ export default function ApplicationForm() {
                         key={option}
                         type="button"
                         onClick={() => updateField('purpose', option)}
-                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                        className={`p-4 rounded-xl border-2 text-left transition-all duration-200 font-medium ${
                           formData.purpose === option
-                            ? 'border-[#00B8A9] bg-[#00B8A9]/5'
-                            : 'border-gray-300 hover:border-[#00B8A9]/50'
+                            ? 'border-[#00B8A9] bg-gradient-to-br from-[#00B8A9]/10 to-[#00B8A9]/5 shadow-md'
+                            : 'border-gray-300 hover:border-[#00B8A9]/50 hover:shadow-sm'
                         }`}
                       >
                         {option}
@@ -168,8 +190,13 @@ export default function ApplicationForm() {
 
             {/* Step 2: Business */}
             {currentStep === 2 && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-[#1E3A5F] mb-6">Your Business</h2>
+              <div className="space-y-8 animate-fade-in">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#00B8A9] to-[#00E5D0] rounded-lg flex items-center justify-center text-white font-bold">
+                    2
+                  </div>
+                  <h2 className="text-3xl font-bold text-[#1E3A5F]">Your Business</h2>
+                </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-[#1E3A5F] mb-3">
@@ -188,10 +215,10 @@ export default function ApplicationForm() {
                         key={option}
                         type="button"
                         onClick={() => updateField('industry', option)}
-                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                        className={`p-4 rounded-xl border-2 text-left transition-all duration-200 font-medium ${
                           formData.industry === option
-                            ? 'border-[#00B8A9] bg-[#00B8A9]/5'
-                            : 'border-gray-300 hover:border-[#00B8A9]/50'
+                            ? 'border-[#00B8A9] bg-gradient-to-br from-[#00B8A9]/10 to-[#00B8A9]/5 shadow-md'
+                            : 'border-gray-300 hover:border-[#00B8A9]/50 hover:shadow-sm'
                         }`}
                       >
                         {option}
@@ -216,10 +243,10 @@ export default function ApplicationForm() {
                         key={option}
                         type="button"
                         onClick={() => updateField('businessAge', option)}
-                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                        className={`p-4 rounded-xl border-2 text-left transition-all duration-200 font-medium ${
                           formData.businessAge === option
-                            ? 'border-[#00B8A9] bg-[#00B8A9]/5'
-                            : 'border-gray-300 hover:border-[#00B8A9]/50'
+                            ? 'border-[#00B8A9] bg-gradient-to-br from-[#00B8A9]/10 to-[#00B8A9]/5 shadow-md'
+                            : 'border-gray-300 hover:border-[#00B8A9]/50 hover:shadow-sm'
                         }`}
                       >
                         {option}
@@ -233,8 +260,13 @@ export default function ApplicationForm() {
 
             {/* Step 3: Contact Information */}
             {currentStep === 3 && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-[#1E3A5F] mb-6">Your Contact Information</h2>
+              <div className="space-y-8 animate-fade-in">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#00B8A9] to-[#00E5D0] rounded-lg flex items-center justify-center text-white font-bold">
+                    3
+                  </div>
+                  <h2 className="text-3xl font-bold text-[#1E3A5F]">Your Contact Information</h2>
+                </div>
                 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -322,8 +354,13 @@ export default function ApplicationForm() {
 
             {/* Step 4: Consent */}
             {currentStep === 4 && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-[#1E3A5F] mb-6">Consent</h2>
+              <div className="space-y-8 animate-fade-in">
+                <div className="flex items-center space-x-3 mb-8">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#00B8A9] to-[#00E5D0] rounded-lg flex items-center justify-center text-white font-bold">
+                    4
+                  </div>
+                  <h2 className="text-3xl font-bold text-[#1E3A5F]">Consent</h2>
+                </div>
                 
                 <div className="space-y-4">
                   <div className={`p-4 rounded-lg border-2 ${errors.consentPartners ? 'border-[#EF4444]' : 'border-gray-300'}`}>
@@ -372,14 +409,17 @@ export default function ApplicationForm() {
             )}
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
+            <div className="flex justify-between mt-10 pt-8 border-t border-gray-200">
               {currentStep > 1 && (
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="px-6 py-3 border-2 border-[#1E3A5F] text-[#1E3A5F] font-semibold rounded-lg hover:bg-[#1E3A5F] hover:text-white transition-all"
+                  className="group px-6 py-3.5 border-2 border-[#1E3A5F] text-[#1E3A5F] font-semibold rounded-xl hover:bg-[#1E3A5F] hover:text-white transition-all inline-flex items-center space-x-2"
                 >
-                  Previous
+                  <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                  </svg>
+                  <span>Previous</span>
                 </button>
               )}
               
@@ -388,16 +428,22 @@ export default function ApplicationForm() {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-8 py-3 bg-[#00B8A9] text-white font-semibold rounded-lg hover:bg-[#009688] transition-all"
+                    className="group px-8 py-3.5 bg-gradient-to-r from-[#00B8A9] to-[#00E5D0] text-white font-semibold rounded-xl hover:shadow-lg transition-all inline-flex items-center space-x-2"
                   >
-                    Next Step
+                    <span>Next Step</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
                   </button>
                 ) : (
                   <button
                     type="submit"
-                    className="px-8 py-3 bg-[#00B8A9] text-white font-semibold rounded-lg hover:bg-[#009688] transition-all"
+                    className="group px-8 py-3.5 bg-gradient-to-r from-[#00B8A9] to-[#00E5D0] text-white font-semibold rounded-xl hover:shadow-lg transition-all inline-flex items-center space-x-2"
                   >
-                    Submit Application
+                    <span>Submit Application</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
                   </button>
                 )}
               </div>

@@ -33,36 +33,39 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="py-16 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-[#1E3A5F] mb-4">How It Works</h2>
+    <section id="how-it-works" className="py-20 px-6 bg-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#00B8A9]/5 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E3A5F] mb-4">How It Works</h2>
           <p className="text-xl text-[#6B7280] max-w-2xl mx-auto">
             Three simple steps to connect with the right financing partners for your business
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {steps.map((step, index) => (
             <div key={index} className="relative">
               {/* Connecting Line (hidden on mobile) */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-0.5 bg-[#00B8A9]/30"></div>
+                <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-1 bg-gradient-to-r from-[#00B8A9] to-transparent"></div>
               )}
               
-              <div className="bg-[#F5F7FA] rounded-xl p-8 text-center relative z-10 hover:shadow-lg transition-shadow">
+              <div className="bg-gradient-to-br from-white to-[#F5F7FA] rounded-2xl p-8 text-center relative z-10 hover:shadow-2xl transition-all duration-300 border border-gray-100 group">
                 {/* Step Number */}
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#00B8A9] text-white text-2xl font-bold rounded-full mb-6">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#00B8A9] to-[#00E5D0] text-white text-3xl font-bold rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
                   {step.number}
                 </div>
                 
                 {/* Icon */}
-                <div className="text-[#1E3A5F] flex justify-center mb-4">
+                <div className="text-[#1E3A5F] flex justify-center mb-6 group-hover:text-[#00B8A9] transition-colors">
                   {step.icon}
                 </div>
                 
-                <h3 className="text-2xl font-bold text-[#1E3A5F] mb-3">{step.title}</h3>
-                <p className="text-[#6B7280]">{step.description}</p>
+                <h3 className="text-2xl font-bold text-[#1E3A5F] mb-4">{step.title}</h3>
+                <p className="text-[#6B7280] leading-relaxed">{step.description}</p>
               </div>
             </div>
           ))}

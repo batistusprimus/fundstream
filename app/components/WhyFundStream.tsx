@@ -48,10 +48,10 @@ export default function WhyFundStream() {
   ];
 
   return (
-    <section className="py-16 px-6 bg-[#F5F7FA]">
+    <section id="why-us" className="py-20 px-6 bg-gradient-to-b from-[#F5F7FA] to-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-[#1E3A5F] mb-4">Why fund-stream?</h2>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E3A5F] mb-4">Why fund-stream?</h2>
           <p className="text-xl text-[#6B7280] max-w-2xl mx-auto">
             We make business financing simple, fast, and transparent
           </p>
@@ -59,12 +59,12 @@ export default function WhyFundStream() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (
-            <div key={index} className="bg-white rounded-xl p-8 text-center hover:shadow-xl transition-shadow">
-              <div className={`${benefit.bgColor} ${benefit.color} w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6`}>
+            <div key={index} className="bg-white rounded-2xl p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
+              <div className={`${benefit.bgColor} ${benefit.color} w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
                 {benefit.icon}
               </div>
               <h3 className="text-xl font-bold text-[#1E3A5F] mb-3">{benefit.title}</h3>
-              <p className="text-[#6B7280]">{benefit.description}</p>
+              <p className="text-[#6B7280] leading-relaxed">{benefit.description}</p>
             </div>
           ))}
         </div>

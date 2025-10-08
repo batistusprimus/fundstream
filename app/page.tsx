@@ -1,3 +1,4 @@
+import Header from './components/Header';
 import Hero from './components/Hero';
 import ApplicationForm from './components/ApplicationForm';
 import HowItWorks from './components/HowItWorks';
@@ -9,15 +10,18 @@ import Footer from './components/Footer';
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <HowItWorks />
-      <ApplicationForm />
-      <WhyFundStream />
-      <SocialProof />
-      <FAQ />
-      <FinalCTA />
-      <Footer />
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <HowItWorks />
+        <ApplicationForm />
+        <WhyFundStream />
+        <SocialProof />
+        <FAQ />
+        <FinalCTA />
+        <Footer />
       </main>
+    </>
   );
 }
