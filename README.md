@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# fund-stream
 
-## Getting Started
+Landing page de génération de leads B2B pour des financements professionnels aux États-Unis.
 
-First, run the development server:
+## 🚀 Démarrage rapide
 
 ```bash
+# Installer les dépendances
+npm install
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Construire pour la production
+npm run build
+
+# Lancer en production
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site sera accessible sur [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Structure du projet
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├── components/          # Composants réutilisables
+│   ├── Hero.tsx        # Section hero avec CTA
+│   ├── ApplicationForm.tsx  # Formulaire multi-étapes (4 steps)
+│   ├── HowItWorks.tsx  # Section "Comment ça marche"
+│   ├── WhyFundStream.tsx    # Section bénéfices
+│   ├── SocialProof.tsx # Témoignages et statistiques
+│   ├── FAQ.tsx         # Questions fréquentes
+│   ├── FinalCTA.tsx    # CTA final
+│   └── Footer.tsx      # Footer avec liens légaux
+├── thank-you/          # Page de remerciement
+│   └── page.tsx
+├── page.tsx            # Page principale
+├── layout.tsx          # Layout racine
+└── globals.css         # Styles globaux
+```
 
-## Learn More
+## 🎨 Brand Kit
 
-To learn more about Next.js, take a look at the following resources:
+### Couleurs
+- **Navy Blue**: `#1E3A5F` - Textes, header, footer
+- **Teal**: `#00B8A9` - CTA, liens, accents
+- **Light Gray**: `#F5F7FA` - Backgrounds
+- **Medium Gray**: `#6B7280` - Textes secondaires
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Typographie
+- **Headlines**: Poppins (SemiBold 600, Bold 700)
+- **Body**: Inter (Regular 400, Medium 500, SemiBold 600)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✅ Conformité
 
-## Deploy on Vercel
+Le site est conforme aux réglementations US :
+- **CCPA** (California Consumer Privacy Act)
+- **FCC Lead Generation Rules**
+- **CFPB** (Consumer Financial Protection Bureau)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Technologies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js 15** avec App Router
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS v4**
+- **Google Fonts** (Inter, Poppins)
+
+## 📱 Responsive
+
+Le site est optimisé pour tous les écrans :
+- Mobile: < 640px
+- Tablet: 640px - 1024px
+- Desktop: > 1024px
+
+## 📝 Notes
+
+- Pas de navigation, pas de menu (landing page pure)
+- Un seul objectif: remplir le formulaire
+- Modèle PPL (Pay-Per-Lead)
+- Service 100% gratuit pour l'utilisateur final
+
+---
+
+© 2025 BPC Group. All rights reserved.
