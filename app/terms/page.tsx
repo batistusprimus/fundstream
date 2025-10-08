@@ -23,7 +23,7 @@ export default function Terms() {
             <section>
               <h2 className="text-2xl font-bold text-[#1E3A5F] mt-8 mb-4">1. Acceptance of Terms</h2>
               <p>
-                By accessing and using fund-stream's services, you accept and agree to be bound by the terms and provision of this agreement.
+                By accessing and using fund-stream&apos;s services, you accept and agree to be bound by the terms and provision of this agreement.
               </p>
             </section>
 

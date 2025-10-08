@@ -30,7 +30,7 @@ export default function CCPA() {
             <section>
               <h2 className="text-2xl font-bold text-[#1E3A5F] mt-8 mb-4">Right to Opt-Out</h2>
               <p>
-                Under CCPA, you have the right to opt-out of the "sale" of your personal information. At fund-stream, we share your information with financial partners to help you find financing opportunities. This sharing may be considered a "sale" under CCPA.
+                Under CCPA, you have the right to opt-out of the &ldquo;sale&rdquo; of your personal information. At fund-stream, we share your information with financial partners to help you find financing opportunities. This sharing may be considered a &ldquo;sale&rdquo; under CCPA.
               </p>
             </section>
 

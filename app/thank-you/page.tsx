@@ -43,7 +43,7 @@ export default function ThankYou() {
               <div>
                 <h3 className="text-xl font-bold text-[#1E3A5F] mb-2">Check Your Email</h3>
                 <p className="text-[#6B7280]">
-                  We've sent a confirmation email to your inbox. Please check your spam folder if you don't see it.
+                  We&apos;ve sent a confirmation email to your inbox. Please check your spam folder if you don&apos;t see it.
                 </p>
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function ThankYou() {
                   </li>
                   <li className="flex items-start">
                     <span className="text-[#00B8A9] mr-2">•</span>
-                    <span>You have no obligation to accept any offer. Feel free to compare and choose what's best for your business.</span>
+                    <span>You have no obligation to accept any offer. Feel free to compare and choose what&apos;s best for your business.</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-[#00B8A9] mr-2">•</span>

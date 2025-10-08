@@ -23,7 +23,7 @@ export default function Privacy() {
             <section>
               <h2 className="text-2xl font-bold text-[#1E3A5F] mt-8 mb-4">Overview</h2>
               <p>
-                fund-stream by BPC Group ("we", "our", "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service.
+                fund-stream by BPC Group (&ldquo;we&rdquo;, &ldquo;our&rdquo;, &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service.
               </p>
             </section>
 
